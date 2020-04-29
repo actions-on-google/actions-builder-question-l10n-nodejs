@@ -1,0 +1,53 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+conditionalEvents:
+- condition: scene.slots.status == "FINAL" && session.params.fruit == "Apple"
+  handler:
+    staticPromptName: static_prompt_4
+  transitionToScene: actions.scene.END_CONVERSATION
+- condition: scene.slots.status == "FINAL"
+  handler:
+    staticPromptName: static_prompt_5
+  transitionToScene: actions.scene.END_CONVERSATION
+intentEvents:
+- handler:
+    staticPromptName: static_prompt_2
+  intent: fruit_lookup
+- handler:
+    staticPromptName: static_prompt_3
+  intent: actions.intent.NO_MATCH_1
+onEnter:
+  staticPromptName: static_prompt_1
+slots:
+- commitBehavior:
+    writeSessionParam: fruit
+  name: fruit
+  promptSettings:
+    initialPrompt:
+      staticPromptName: static_prompt_6
+    noInputFinalPrompt:
+      staticPromptName: static_prompt_7
+    noInputPrompt1:
+      staticPromptName: static_prompt_7
+    noInputPrompt2:
+      staticPromptName: static_prompt_7
+    noMatchFinalPrompt:
+      staticPromptName: static_prompt_7
+    noMatchPrompt1:
+      staticPromptName: static_prompt_7
+    noMatchPrompt2:
+      staticPromptName: static_prompt_7
+  required: true
+  type:
+    name: fruit
